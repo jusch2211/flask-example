@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <title>Kaffee Übersicht</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col s3">
+            <ul class="sidenav sidenav-fixed">
+                {% for link in menu_links %}
+                <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col s9">
+            <div class="container">
+                <h3>Kaffee Übersicht</h3>
+                <div class="row">
+                    {% for coffee in coffees %}
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{{ coffee.name }}</span>
+                                <p>{{ coffee.description }}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{ url_for('update', index=loop.index0) }}">Bearbeiten</a>
+                                <form action="{{ url_for('delete', index=loop.index0) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn red">Löschen</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for('create') }}" class="btn waves-effect waves-light">Neuen Kaffee hinzufügen</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

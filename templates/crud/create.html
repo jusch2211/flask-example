@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <title>Hallo</title>
+    <title>Kaffee hinzufügen</title>
 </head>
 <body>
     <div class="row">
@@ -16,21 +16,21 @@
             </ul>
         </div>
         <div class="col s9">
-            <div class="container center-align" style="margin-top: 50px;">
-                <h3>Hallo-Seite</h3>
+            <div class="container">
+                <h3>Kaffee hinzufügen</h3>
                 <form method="POST">
                     <div class="input-field">
                         <input id="name" type="text" name="name" required>
-                        <label for="name">Name</label>
+                        <label for="name">Kaffeesorte</label>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit">Senden</button>
+                    <div class="input-field">
+                        <textarea id="description" class="materialize-textarea" name="description" required></textarea>
+                        <label for="description">Beschreibung</label>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit">Hinzufügen</button>
                 </form>
-                {% if name %}
-                <h4 style="margin-top: 20px;">Hallo {{ name }}</h4>
-                {% endif %}
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
