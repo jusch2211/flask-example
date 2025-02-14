@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container center-align" style="margin-top: 100px;">
+        <h3>Login</h3>
+        <form method="POST">
+            <div class="input-field">
+                <input id="username" type="text" name="username" required>
+                <label for="username">Benutzername</label>
+            </div>
+            <div class="input-field">
+                <input id="password" type="password" name="password" required>
+                <label for="password">Passwort</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">Anmelden</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="red-text" style="margin-top: 20px;">{{ messages[0] }}</div>
+        {% endif %}
+        {% endwith %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
