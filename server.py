@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Secret key for flash messages
@@ -8,6 +8,12 @@ USER_CREDENTIALS = {
     "username": "admin",
     "password": "1234"
 }
+
+# Liste mit fiktiven Kaffee-Sorten
+coffee_list = [
+    "Espresso", "Latte", "Cappuccino", "Macchiato", "Mocha", "Americano",
+    "Flat White", "Cortado", "Ristretto", "Affogato"
+]
 
 # In-Memory-Datenbank für CRUD-Operationen
 coffee_db = []
@@ -88,9 +94,20 @@ def inject_menu():
         {"name": "Startseite", "url": url_for('homepage')},
         {"name": "Impressum", "url": url_for('impressum')},
         {"name": "Hallo", "url": url_for('hallo')},
-        {"name": "CRUD Übersicht", "url": url_for('read')}
+        {"name": "CRUD Übersicht", "url": url_for('read')},
+        {"name": "Ajax-Test", "url": url_for('ajaxtest')}
     ]
     return {"menu_links": menu_links}
+
+@app.route('/ajaxtest')
+def ajaxtest():
+    return render_template('ajaxtest.html')
+
+@app.route('/search_coffee', methods=['GET'])
+def search_coffee():
+    query = request.args.get('query', '').lower()
+    filtered_coffee = [coffee for coffee in coffee_list if coffee.lower().startswith(query)]
+    return jsonify(filtered_coffee)
 
 
 if __name__ == '__main__':
